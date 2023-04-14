@@ -18,7 +18,7 @@ float bs_sqrt(float x) {
 }
 
 int main() {
-    float x = 100;
+    float x = 10000;
     float res = bs_sqrt(x);
 
     printf("Die Quadratwurzel von %.0f ist %.4f\n", x, res);
