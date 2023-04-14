@@ -1,0 +1,46 @@
+Aufgabe 0
+
+Theoriefragen
+(Alle Befehle werden auf WSL2 Ubuntu 22.04 mit gcc (für man 3 printf) installiert ausgeführt)
+
+1.	Mit dem Parameter -r (ls -r) wird der gesamte Inhalt eines Verzeichnisses in umgekehrter Reihenfolge angezeigt.
+
+2.	man steht für Manual (Anleitung). man erklärt, wie man ein UNIX-Kommando nutzt, 
+wie z.B. welche Argumente man nutzen kann oder was das Syntax für ein Kommando ist.
+
+man 1 printf zeige die Anleitung für printf in der Section 1 (ausführbare Kommandos oder Shell-Kommandos)
+→ man 1 printf ist für die Nutzung von printf in dem Shell
+man 3 printf zeige die Anleitung für printf in der Section 3 (Aufrufe aus Programmbibliotheken)
+→ man 3 printf ist für die Nutzung von printf in einem C-Programm.
+
+3.	Mit mv kann man Dateien und Ordner umbenennen. Außerdem kann man auch Dateien und Ordner verschieben.
+z.B.	mv eins zwei 	→ Ordner eins wird im zwei umbenannt.
+	    mv eins ./zwei 	→ Ordner eins wird in zwei verschoben und ist deshalb Unterordner von zwei.
+
+Programmierfragen
+1. p dient als die Genauigkeit der Berechnung. Je kleiner p ist, desto nähern sich die Werte a² und x an.
+
+2. Bei großen Werte von x kann es zu einem Überlauf kommen, da die Variable x vom Typ int ist.
+beobachtetes Verhalten: (große Zahlen wird durch " " getrennt für bessere Lesbarkeit)
+(alle erwartete Ausgabe werden mit https://www.calculator.net/big-number-calculator.html berechnet)
+
+Eingabe (x)					Ergebnis (res)				Erwartete Ergebnis			printf("%.0f", x)
+49							7.0000						7.0000						49
+482 387 427 878				694 541.1250				694 541.1635				482 387 427 328
+-48							---------------------------- Segmentation fault ----------------------------
+0							0.0020						0							0					
+472 757 247 083 489			21 742 982.0000				21 742 981.5591				472 757 250 818 048
+2 147 483 600				46 340.9492					46 340.9494					2 147 483 648
+4 727 572 470 834 890 000	2 174 298 112.0000			2 174 298 155.9194			4 727 572 344 971 722 752
+
+Falls man die printf("%.0f", x) mit print("%d", x) wechseln (int-Ausdruck statt float-Ausdruck), 
+dann wird alle Werte über 2 147 483 647 (2^31 - 1) als -2 147 483 648 ausgegeben.
+
+Bei große Float-Werten hat ihr Ausdruck große Abweichung, da Float im Hardware nicht genau gespeichert werden können.
+(siehe https://stackoverflow.com/questions/588004/is-floating-point-math-broken)
+Es gibt deshalb auch kleine Abweichung bei dem Ergebnis aus demselben Grund.
+
+3. In einer rekursiven Funktion wird bei jedem Aufruf ein neuer Aufrufrahmen (engl. gemeint: call frame) oben auf dem Stack erstellt.
+Da der Stack nach unten wächst, wird die Adresse lokale Variablen immer kleiner.
+
+4. Globale Variablen wird im BSS-Segment gespeichert. Lokale Variablen wird im Stack gespeichert.
